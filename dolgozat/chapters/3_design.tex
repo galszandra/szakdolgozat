@@ -5,6 +5,51 @@
 Az alkalmazás célja az optimalizált heti beosztás elérése, de ahhoz, hogy a program ezt kivitelezze, először meg kell adnunk a teendőinket és a hozzá tartozó adatokat, mint a prioritás és határidő. Ez a fejezet foglalja össze és konkretizálja azon funkciókat, amelyek megvalósítására majd sor kerül az implementációban.
 
 \begin{itemize}
+	\item teendők ismertetése - legalapvetőbb funkció mind közül.
+	\item perc alapú megvalósítás - mindig adni kell időtartamot, időkeretet
+	\item prioritás megadása
+	\item fix időpontú események megadása
+	\item heti felosztás
+	\item optimalizálás: a legfontosabb funkció, az alkalmazás lényege, a feladatokat beütemezzük úgy, hogy az a lehető leghatékonyabb megoldást, tervet állítsa elő nekünk, külön pontban tárgyaljuk a kivitelezését, két szempont alapján: idő és prioritás.
+\end{itemize}
+
+Az alkalmazás célja az optimalizált heti beosztás elérése, de ahhoz, hogy a program ezt kivitelezni tudja szüksége van a tevékenységek listájára, amelyeket véghez szeretnénk vinni, valamint a hozzá tartozó adatokra, mint a prioritás és határidő. Ez a fejezet foglalja össze és konkretizálja azon funkciókat, szolgáltatásokat, amelyek megvalósítására sor kerül az implementációban. A nehézsége az egésznek, hogy nem csak olyan eseményekre kell figyelmet fordítanunk, amelyeket bármelyik nap bármikor megtehetünk, hanem számolnunk kell olyan programokkal is, amik fix időpontban történnek meg, akár minden héten, akár csak alkalomadtán, amiket ezáltal nem tudunk átrendezni kedvünk szerint. Ebből kifolyólag ezeket optimalizálni se tudjuk. Ezáltal arra jutottam, hogy legjobb, ha három csoportba szedem a megadható teendőket: napirendre, fix programokra, és magának a to-do listának a csoportjára.
+
+\Section{Napirend}
+
+A napirendet és a fix programok megadását praktikusság szempontjából választottam külön a to-do listától. A napirend megadásának gondolata onnan származik, hogy az emberek többségének élete olyan fix időpontban történő események köré épül fel, mint a hétfőtől péntekig 8-tól 4-ig tartó munkaidő vagy az egyetemistáknál és diákoknál az előre meghatározott tanórák. De beszélhetnénk itt a rendszeres sportot űző fiatalokról, akiknek edzése meghatározott napokon, meghatározott időpontokban történik vagy azon személyekről, akiknek ingázás miatt a buszozás is napirendjükké vált. Ezeket és az ehhez hasonló eseményeket felesleges és időpazarló lenne minden héten újra és újra feljegyezni, praktikusabbnak tartom annak megvalósítását, hogy a programomban lehetőség legyen ezeknek minden héten az automatikus megjelenítésére. Ide tartozhatnak még tetszés szerint az alvási rutinok megadása, esetleg ebédszünetek beillesztése is.
+
+\Section{Fix programok megadása}
+
+A fix időpontban történő programokhoz tartoznak azok az események, amelyeknek felmerülése nem minden héten esedékes, viszont a hozzá tartozó nap és időpont már véglegesített. Ezeket, a napirendhez hasonlóan, nem tudnánk optimalizálni, hiszen nem mozoghatjuk őket szabadon kedvünk szerint. Prioritás sem tartozhat hozzájuk fix időpontjukból kiindulóan. Ilyen lehet például a fodrászhoz vagy fogászatra megbeszélt időpont, vagy egy előre megbeszélt találkozó.
+
+\Section{To-do lista}
+
+A to-do listánk megadása az egyik legalapvetőbb funkció mind közül, hiszen fel kell sorolni azokat a feladatokat, amelyeket szabadidőnkben meg szeretnénk valósítani ahhoz, hogy ezeket aztán optimalizálni tudjuk. Egy adott tevékenység meghatározásakor meg kell adni a tevékenység nevét, azt az időtartamot, amelyet előreláthatólag rá fogunk szánni és a prioritását, amivel tudatjuk, hogy mennyire fontos az adott feladattal végeznünk. Az időtartamnak a percben való megadását választottam, mivel ezáltal a rövidebb, pár perces tevékenységeket ugyanolyan könnyedén megadhatjuk, mint a hosszabb, akár 1-2 órásakat is.
+
+%A prioritásokon még gondolkozok, hogy elég-e egy 1-5-ig skála, vagy elég kevesebb is, mondjuk 1-3-ig és akkor nem fontos/közepesen fontos/fontos ???
+
+A programomban azért erre a két attribútumra fókuszálok, mert az előbbi fejezetben nyilvánvalóvá vált, hogy ez a két tényező a legtöbb módszer alapja, ezáltal ez tűnt célszerűnek. A későbbiekben, amennyiben lehetőségem nyílik rá, megfontolandónak tartom egyéb tényezők figyelembevételét is, azaz, hogy hogyan tudnám súlyozni a feladatokat különböző szempontok szerint az előzőek mellett, mint például mennyire nehéz vagy épp mennyi haszonnal jár az elvégzése számunkra.
+
+\Section{Optimalizálás}
+
+A legfontosabb funkció, az alkalmazás lényege. A feladatok beütemezése úgy történik, hogy azzal a lehető leghatékonyabb megoldást, tervezetet kapjuk meg. Az ütemezés kivitelezését külön fejezetben tárgyalom, ahol meghatározom magát az ütemezési problémát, valamint a lehetséges megoldásokat rá.
+
+Az programmal kapcsolatos elvárások közé tartozik, hogy a napirend vagy fix esemény megadásakor, ne legyen lehetőségünk ugyanazt az időpontot beállítani, a probléma felmerülésekor ezt a program egy hibaüzenettel jelezze. Egy másik fontos elvárás, hogy az optimalizálás kivitelezésekor a program a lefoglalt időtartamokat elkerülje.
+
+Az alkalmazás lényege tehát, hogy felismerje azokat az üres időtartamokat, ahol semmilyen program nincs leszervezve és a megmaradandó helyeket a lehető legjobb belátása szerint töltse fel azokkal a tevékenységekkel, amelyeket a szabadidőnkben szeretnénk megcsinálni. Ha egy nap már nem maradt üres terület, akkor a megmaradt feladatok kerüljenek át a következő napra, ha az betelt, akkor az azt következőre és így tovább. //ez a bekezdés kerüljön előrébb, hogy ne itt a végén legyen?
+
+%napi rendet, fix programokat automatikusan betölti a heti nézetbe
+
+%a todo lista elemeit megjeleníti és egy gombnyomásra optimalizálja vagy mindig, amikor megadunk egy új tevékenységet, akkor automatikusan újraoptimalizálja az addigiakat?
+
+
+
+% TODO: Érdemes lehet külön specifikációs és tervezéses fejezetet csinálni!
+
+Az alkalmazás célja az optimalizált heti beosztás elérése, de ahhoz, hogy a program ezt kivitelezze, először meg kell adnunk a teendőinket és a hozzá tartozó adatokat, mint a prioritás és határidő. Ez a fejezet foglalja össze és konkretizálja azon funkciókat, amelyek megvalósítására majd sor kerül az implementációban.
+
+\begin{itemize}
 \item teendők ismertetése - legalapvetőbb funkció mind közül.
 \item perc alapú megvalósítás - mindig adni kell időtartamot, időkeretet
 \item prioritás megadása
