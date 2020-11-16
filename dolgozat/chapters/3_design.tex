@@ -1,73 +1,69 @@
 \Chapter{Az alkalmazás specifikációja}
 
-% TODO: Érdemes lehet külön specifikációs és tervezéses fejezetet csinálni!
+\Section{Általános leírás}
+A dolgozat célja egy olyan alkalmazás elkészítése, amely különböző feladatok időbeli ütemezésével foglalkozik. Az alkalmazás egy 8 órás időegységen belül vizsgálja, hogy a feladatok prioritása és a feladatokra szánt időtartamok megadásával hogyan lehet adott szempontrendszer alapján optimális, vagy ahhoz közeli ütemezést elérni. Figyelembe veszi a maximum időegységet, így az elhanyagolható tevékenységeket kiszelektálja és a hatékonyabb időbeosztás elérését szolgáló tevékenységeket beütemezését valósítja meg. A különböző feladatokat adataikkal együtt a felvitel sorrendjében vizuálisan ábrázolja, végül pedig egy ütemezett eredményt jelenít meg a grafikus felületen, azokkal az elemmel, amelyek belefértek az adott időkeretbe az adott követelményrendszer szerint.
 
-Az alkalmazás célja az optimalizált heti beosztás elérése, de ahhoz, hogy a program ezt kivitelezze, először meg kell adnunk a teendőinket és a hozzá tartozó adatokat, mint a prioritás és határidő. Ez a fejezet foglalja össze és konkretizálja azon funkciókat, amelyek megvalósítására majd sor kerül az implementációban.
+\Section{Feladatok}
+A feladatok definiálása az egyik alapvető funkciója az alkalmazásnak, hiszen el kell tárolni a hozzá tartozó adatokkal együtt, hogy aztán eszerint az ütemezést végre lehessen hajtani. 
 
-\begin{itemize}
-	\item teendők ismertetése - legalapvetőbb funkció mind közül.
-	\item perc alapú megvalósítás - mindig adni kell időtartamot, időkeretet
-	\item prioritás megadása
-	\item fix időpontú események megadása
-	\item heti felosztás
-	\item optimalizálás: a legfontosabb funkció, az alkalmazás lényege, a feladatokat beütemezzük úgy, hogy az a lehető leghatékonyabb megoldást, tervet állítsa elő nekünk, külön pontban tárgyaljuk a kivitelezését, két szempont alapján: idő és prioritás.
-\end{itemize}
+\SubSection{Feladatokhoz tartozó adatok}
 
-Az alkalmazás célja az optimalizált heti beosztás elérése, de ahhoz, hogy a program ezt kivitelezni tudja szüksége van a tevékenységek listájára, amelyeket véghez szeretnénk vinni, valamint a hozzá tartozó adatokra, mint a prioritás és határidő. Ez a fejezet foglalja össze és konkretizálja azon funkciókat, szolgáltatásokat, amelyek megvalósítására sor kerül az implementációban. A nehézsége az egésznek, hogy nem csak olyan eseményekre kell figyelmet fordítanunk, amelyeket bármelyik nap bármikor megtehetünk, hanem számolnunk kell olyan programokkal is, amik fix időpontban történnek meg, akár minden héten, akár csak alkalomadtán, amiket ezáltal nem tudunk átrendezni kedvünk szerint. Ebből kifolyólag ezeket optimalizálni se tudjuk. Ezáltal arra jutottam, hogy legjobb, ha három csoportba szedem a megadható teendőket: napirendre, fix programokra, és magának a to-do listának a csoportjára.
+Cím (TaskTitle): Egy adott tevékenység meghatározásakor szükséges megadni a tevékenység nevét, a prioritását, ami jelzi, hogy mennyire fontos egy adott feladattal mihamarabb végezni, valamint azt az időtartamot, amely előreláthatólag lefedi a tevékenység hosszát.
 
-\Section{Napirend}
+Prioritás (TaskPriority): A prioritás megadásánál 3 lehetőség közül lehet választani. 1-től 3-ig adható meg, mennyire tartja fontosnak a felhasználó a feladat elvégzését; minél magasabb számérték megadása történik, annál fontosabbként lesz kezelve az adott feladat. Tehát, az 1-es számérték jelzi az alacsony prioritást, a 2-es számérték jelzi a közepes prioritást, a 3-as számérték pedig a magas prioritást. Prioritások használatakor bevett szokás szín szerinti megkülönböztető jelzést használni, így ebben az alkalmazásban is sor kerül erre. A megjelenítés során a diagramsáv keretének színe jelzi, hogy az adott feladathoz milyen értéket rendeltünk. Magas prioritás esetén piros, közepes esetén szürke, alacsony prioritás esetén zöld kerettel jelenik meg a grafikusan ábrázolt feladat sávja.
 
-A napirendet és a fix programok megadását praktikusság szempontjából választottam külön a to-do listától. A napirend megadásának gondolata onnan származik, hogy az emberek többségének élete olyan fix időpontban történő események köré épül fel, mint a hétfőtől péntekig 8-tól 4-ig tartó munkaidő vagy az egyetemistáknál és diákoknál az előre meghatározott tanórák. De beszélhetnénk itt a rendszeres sportot űző fiatalokról, akiknek edzése meghatározott napokon, meghatározott időpontokban történik vagy azon személyekről, akiknek ingázás miatt a buszozás is napirendjükké vált. Ezeket és az ehhez hasonló eseményeket felesleges és időpazarló lenne minden héten újra és újra feljegyezni, praktikusabbnak tartom annak megvalósítását, hogy a programomban lehetőség legyen ezeknek minden héten az automatikus megjelenítésére. Ide tartozhatnak még tetszés szerint az alvási rutinok megadása, esetleg ebédszünetek beillesztése is.
+Időtartam (TaskDuration): A feladatokra szánt időtartamoknak a percben való megadására van lehetőség, mivel ezáltal a rövidebb, pár perces tevékenységek ugyanolyan könnyedén megadhatóak, mint a hosszabb, akár 1-2 órásak is. Mivel az ütemezés 8 órás időegységen belül történik, ezért 8 óránál, azaz 480 percnél hosszabb időtartamú esemény megadására nincs lehetőség, mivel annak beütemezésre úgyse kerülne sor.
 
-\Section{Fix programok megadása}
-
-A fix időpontban történő programokhoz tartoznak azok az események, amelyeknek felmerülése nem minden héten esedékes, viszont a hozzá tartozó nap és időpont már véglegesített. Ezeket, a napirendhez hasonlóan, nem tudnánk optimalizálni, hiszen nem mozoghatjuk őket szabadon kedvünk szerint. Prioritás sem tartozhat hozzájuk fix időpontjukból kiindulóan. Ilyen lehet például a fodrászhoz vagy fogászatra megbeszélt időpont, vagy egy előre megbeszélt találkozó.
-
-\Section{To-do lista}
-
-A to-do listánk megadása az egyik legalapvetőbb funkció mind közül, hiszen fel kell sorolni azokat a feladatokat, amelyeket szabadidőnkben meg szeretnénk valósítani ahhoz, hogy ezeket aztán optimalizálni tudjuk. Egy adott tevékenység meghatározásakor meg kell adni a tevékenység nevét, azt az időtartamot, amelyet előreláthatólag rá fogunk szánni és a prioritását, amivel tudatjuk, hogy mennyire fontos az adott feladattal végeznünk. Az időtartamnak a percben való megadását választottam, mivel ezáltal a rövidebb, pár perces tevékenységeket ugyanolyan könnyedén megadhatjuk, mint a hosszabb, akár 1-2 órásakat is.
-
-%A prioritásokon még gondolkozok, hogy elég-e egy 1-5-ig skála, vagy elég kevesebb is, mondjuk 1-3-ig és akkor nem fontos/közepesen fontos/fontos ???
-
-A programomban azért erre a két attribútumra fókuszálok, mert az előbbi fejezetben nyilvánvalóvá vált, hogy ez a két tényező a legtöbb módszer alapja, ezáltal ez tűnt célszerűnek. A későbbiekben, amennyiben lehetőségem nyílik rá, megfontolandónak tartom egyéb tényezők figyelembevételét is, azaz, hogy hogyan tudnám súlyozni a feladatokat különböző szempontok szerint az előzőek mellett, mint például mennyire nehéz vagy épp mennyi haszonnal jár az elvégzése számunkra.
-
-\Section{Optimalizálás}
-
-A legfontosabb funkció, az alkalmazás lényege. A feladatok beütemezése úgy történik, hogy azzal a lehető leghatékonyabb megoldást, tervezetet kapjuk meg. Az ütemezés kivitelezését külön fejezetben tárgyalom, ahol meghatározom magát az ütemezési problémát, valamint a lehetséges megoldásokat rá.
-
-Az programmal kapcsolatos elvárások közé tartozik, hogy a napirend vagy fix esemény megadásakor, ne legyen lehetőségünk ugyanazt az időpontot beállítani, a probléma felmerülésekor ezt a program egy hibaüzenettel jelezze. Egy másik fontos elvárás, hogy az optimalizálás kivitelezésekor a program a lefoglalt időtartamokat elkerülje.
-
-Az alkalmazás lényege tehát, hogy felismerje azokat az üres időtartamokat, ahol semmilyen program nincs leszervezve és a megmaradandó helyeket a lehető legjobb belátása szerint töltse fel azokkal a tevékenységekkel, amelyeket a szabadidőnkben szeretnénk megcsinálni. Ha egy nap már nem maradt üres terület, akkor a megmaradt feladatok kerüljenek át a következő napra, ha az betelt, akkor az azt következőre és így tovább. //ez a bekezdés kerüljön előrébb, hogy ne itt a végén legyen?
-
-%napi rendet, fix programokat automatikusan betölti a heti nézetbe
-
-%a todo lista elemeit megjeleníti és egy gombnyomásra optimalizálja vagy mindig, amikor megadunk egy új tevékenységet, akkor automatikusan újraoptimalizálja az addigiakat?
-
-
-
-% TODO: Érdemes lehet külön specifikációs és tervezéses fejezetet csinálni!
-
-Az alkalmazás célja az optimalizált heti beosztás elérése, de ahhoz, hogy a program ezt kivitelezze, először meg kell adnunk a teendőinket és a hozzá tartozó adatokat, mint a prioritás és határidő. Ez a fejezet foglalja össze és konkretizálja azon funkciókat, amelyek megvalósítására majd sor kerül az implementációban.
+Hasonló alkalmazásoknál megfigyelhető, hogy egy feladathoz számos egyéb adat hozzárendelése lehetséges, például:
 
 \begin{itemize}
-\item teendők ismertetése - legalapvetőbb funkció mind közül.
-\item perc alapú megvalósítás - mindig adni kell időtartamot, időkeretet
-\item prioritás megadása
-\item fix időpontú események megadása
-\item heti felosztás
-\item optimalizálás: a legfontosabb funkció, az alkalmazás lényege, a feladatokat beütemezzük úgy, hogy az a lehető leghatékonyabb megoldást, tervet állítsa elő nekünk, külön pontban tárgyaljuk a kivitelezését, két szempont alapján: idő és prioritás.
+	\item leírás,
+	\item színjelzés,
+	\item létrehozás ideje,
+	\item különböző címkék csoportosításhoz,
+	\item tulajdonos,
+	\item csapattagok,
+	\item státusz jelzés.
 \end{itemize}
 
-% TODO: Use case készítése. Ábrával, állapotátmenet diagram félével. Ha egy nézetben szerepel az összes lényegi funkció, akkor arról elég egy ábra is. (Kb. ahogy a megrendelő leírná, hogy mit vár el az alkalmazástól.)
+Ezeknél az alkalmazásoknál gyakran megfigyelhető, hogy nem feltétlen egy felhasználó számára készített programokról van szó, hanem lehetőséget nyújtanak több felhasználó számára, hogy például egy adott projektet egyidejűleg elérjenek és közösen dolgozzanak rajta. A felsorolt adatok pedig segítenek nyomon követni és átláthatóbbá tenni a csapatmunkát.
 
-% TODO: Megnézni, hogy az egyes rendszerekben a feladat milyen néven szokott megjelenni. Pl.: issue, task, ticket (Mantis, Trac, Redmine, Jira, GitHub, GitLab, ...)
+A programomban azért a prioritásokra és időtartamokra fókuszálok, mert az előző fejezetben nyilvánvalóvá vált, hogy ez a két tényező a legtöbb hatékonyságnövelő módszer alapja, ezáltal ez tűnt célszerűnek. A későbbiekben, amennyiben lehetőségem nyílik rá, megfontolandónak tartom egyéb tényezők figyelembevételét is, azaz, hogy hogyan tudnám súlyozni a feladatokat különböző szempontok szerint az előzőek mellett, mint például mennyire nehéz vagy épp mennyi haszonnal jár az elvégzése számunkra. 
 
-\Section{Feladatokhoz tartozó adatok}
+\SubSection{Feladatok hozzáadása}
+Feladat hozzáadásakor a cím, a prioritás, és a feladatra szánt becsült időtartam megadása kötelező, a három adat közül bármely kihagyása esetén egy felugró üzenet figyelmeztet a hibás érték(ek)re. Azonos nevű feladat hozzáadása nem lehetséges. Az időtartamhoz maximum 480 perc megadása áll rendelkezésre, erre fel is hívja a figyelmet egy üzenet a kurzort az időtartam felé mozgatva. A prioritásnál szintén hasonló üzenet jelzi a megadható prioritásértékeket (1-alacsony, 2-közepes, 3-magas).
 
-Cím (title)
-Description (description)
-Prioritás (priority)
-Tervezett hossz (estimated duration)
-Ütemezett hossz (interval vagy period)
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/addTasks.png}
+	\caption{Feladatok definiálása a programban}
+	\label{fig:addTasks}
+\end{figure}
 
-% TODO: Hasonló rendszerekben megnézni, hogy milyen további adatokat szoktak rendelni a feladatokhoz. (Pl.: feladat tulajdonosa, létrehozás ideje, label/keyword/tag/topic, státusz jelzés.)
+Megfelelő adatok megadása esetén, a „Hozzáad” gombra kattintva egy felugró üzenet jelzi, hogy a feladat hozzáadása sikeres volt. Ezzel egyidejűleg a feladat grafikus ábrázolás is megtörténik a diagramon. Láthatóvá kell tenni a feladat címét, mögötte a hozzá tartozó időtartammal, valamint egy, az időtartammal megegyező hosszúságú sávot, a prioritásnak megfelelő piros, szürke vagy zöld kerettel.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.7]{images/diagram.png}
+	\caption{Feladatok grafikus ábrázolása}
+	\label{fig:diagram}
+\end{figure}
+
+Következő feladatok definiálásakor a diagramon megjelenő információk mindig az előzőek alá kerülnek.
+
+\Section{Optimalizálás és ütemezés}
+
+Az alkalmazás lényegi funkciója. A feladatok ütemezése során a programnak az időkeretbe beleférő legnagyobb összértéket kell előállítania, ezáltal pedig a lehető leghatékonyabb megoldást, tervezetet megkapni. Az ütemezés kivitelezésére külön fejezetben kerül sor, ahol meghatározom magát az ütemezési problémát, valamint a lehetséges megoldásokat rá. Az optimalizálás a program futása során nem automatikusan történik, minden egyes újabb feladat hozzáadásakor, hanem a felhasználó az általa szükségesnek vélt feladatok hozzáadása után kérheti az ütemezést az "Optimalizál" gomb megnyomásával.
+
+Az optimalizálás végrehajtásához minimum két feladat megléte szükséges. Az "Optimalizál" gomb megnyomására a program végrehajtja az optimalizálást és az ütemezést. A sikeres ütemterv létrehozását egy felugró ablak jelzi. Ezután megjelenik egy "Ütemezett sorrend" felirat, melyet követően azon feladatok nevei szerepelnek, amelyeket a program beütemezett a 8 órás időkeretbe, olyan sorrendben, ahogy azokat célszerű végrehajtani az ütemező szerint. Az ütemterv grafikus ábrázolása során a diagramon megjelenő sávok egymás mellett jelennek meg lehetőség szerint kitöltve a 8 órányi időtartamot. Az ütemező a kihagyott feladatok neveit is megjeleníti. Ha az ütemezendő feladatok összideje nem éri a 8 órát, ezáltal minden elem sikeresen belekerült az időkeretbe, akkor ezt egy "Minden feladat belefért az időkeretbe!" felirat jelzi.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.7]{images/scheduledTasks.png}
+	\caption{Ütemterv grafikus ábrázolása}
+	\label{fig:scheduledTasks}
+\end{figure}
+
+
+
