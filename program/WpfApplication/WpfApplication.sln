@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "WpfApplication.csproj", "{6B56994F-2EFC-4EAE-968D-B0BC6FF72C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler", "..\Scheduler\Scheduler.csproj", "{11F37136-E22E-495B-A29B-9A15A5D3554D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B56994F-2EFC-4EAE-968D-B0BC6FF72C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B56994F-2EFC-4EAE-968D-B0BC6FF72C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B56994F-2EFC-4EAE-968D-B0BC6FF72C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B56994F-2EFC-4EAE-968D-B0BC6FF72C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11F37136-E22E-495B-A29B-9A15A5D3554D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F37136-E22E-495B-A29B-9A15A5D3554D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F37136-E22E-495B-A29B-9A15A5D3554D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F37136-E22E-495B-A29B-9A15A5D3554D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B82F145-300D-4182-8909-83E8280245FC}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/galszandra
+		SccProjectUniqueName0 = ..\\Scheduler\\Scheduler.csproj
+		SccProjectName0 = ../Scheduler
+		SccLocalPath0 = ..\\Scheduler
+		SccProjectUniqueName1 = WpfApplication.csproj
+		SccLocalPath1 = .
+		SccLocalPath2 = .
+	EndGlobalSection
+EndGlobal
