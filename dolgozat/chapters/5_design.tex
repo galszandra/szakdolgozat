@@ -10,21 +10,22 @@ Az egyetemi éveim alatt lehetőségem volt 2 féléven keresztül az evosoft Hu
 
 A C\# egy általános célú, objektumorientált programozási nyelv, valamint a .NET egyik fő programozási nyelve. A C nyelvcsaládhoz tartozik, így ismert lehet a C++ és Java programozók számára, hiszen ilyen alapokon fejlesztették ki. Platformfüggetlenségét a .NET környezet biztosítja.
 
-A .NET keretrendszer gyors és hatékony alkalmazásfejlesztést biztosít a .NET osztálykönyvtárak által. A különböző nyelveken írt komponensek együttműködését pedig a CLR (Common Language Runtime) és a CTS (Common Type Sytem) segítségével könnyíti meg.
+A .NET keretrendszer gyors és hatékony alkalmazásfejlesztést biztosít a .NET osztálykönyvtárak által. A különböző nyelveken írt komponensek együttműködését pedig a CLR (Common Language Runtime) és a CTS (Common Type Sytem) segítségével könnyíti meg.\cite{csharp}
 
-% TODO: hivatkozás
 
 \SubSection{Visual Studio}
 
-A Visual Studio egy integrált fejlesztői környezet, amelyet a Microsoft fejlesztett ki különböző alkalmazások, pl.: konzol, webalkalmazások, mobilalkalmazások fejlesztésére. Lehetőséget nyújt a C\#-on kívül például Viusal Basic, F\# és számos más nyelveken történő programozásra.  Az alkalmazásom megvalósításakor én a Community kiadást választottam, ami egy olyan ingyenes verzió, amely a Professional kiadáshoz hasonló szolgáltatásokat tartalmaz.
+A Visual Studio egy integrált fejlesztői környezet, amelyet a Microsoft fejlesztett ki különböző alkalmazások, pl.: konzol, webalkalmazások, mobilalkalmazások fejlesztésére. Lehetőséget nyújt a C\#-on kívül például Viusal Basic, F\# és számos más nyelveken történő programozásra.  Az alkalmazásom megvalósításakor én a Community kiadást választottam, ami egy olyan ingyenes verzió, amely a Professional kiadáshoz hasonló szolgáltatásokat tartalmaz.\cite{vs}
 
-% TODO: hivatkozás
+
 
 \SubSection{WPF}
 
-A WPF (Windows Presentation Foundation) egy grafikus felhasználói felületet biztosító keretrendszer. Előnye a XAML nyelv, amely megkönnyíti a felhasználói felület létrehozását és szerkesztését, valamint lehetővé teszi magának a UI tervezésének elkülönítését a program többi részétől. Emellett, lehetőség van DataBinding használatára, amely állandó kapcsolatot biztosít az alkalmazás felhasználói felülete és backend-en tárolt adatok között. Így, egy adat backend-en történő értékének megváltozása során a felhasználói felület automatikusan fog frissülni és fordítva.
+A WPF (Windows Presentation Foundation) egy grafikus felhasználói felületet biztosító keretrendszer. Előnye a XAML nyelv, amely megkönnyíti a felhasználói felület létrehozását és szerkesztését, valamint lehetővé teszi magának a UI tervezésének elkülönítését a program többi részétől. Emellett, lehetőség van DataBinding használatára, amely állandó kapcsolatot biztosít az alkalmazás felhasználói felülete és backend-en tárolt adatok között. Így, egy adat backend-en történő értékének megváltozása során a felhasználói felület automatikusan fog frissülni és fordítva.\cite{wpf}\cite{databinding}
 
-% TODO: hivatkozás
+\SubSection{MahApps}
+A MahApps egy olyan keretrendszer, amely egy modernebb felhasználói felület elérését segíti a WPF-en keresztül. Az alkalmazásom megvalósítása kezdetén kezdtem használni, viszont a későbbiekben háttérbe került a diagram Canvas-sal történő fejlesztése végett.
+
 
 \SubSection{MVVM}
 Az MVVM rövidítés a Model, View, ViewModel szavakból származik. A séma lényege, hogy az alkalmazásunkat erre a három, jól elkülöníthető logikai egységre szedjük szét, mely által jobban átláthatóvá válnak. A három egység különböző célokat szolgál.
@@ -32,28 +33,23 @@ Az MVVM rövidítés a Model, View, ViewModel szavakból származik. A séma lé
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/mvvm.png}
-	\caption{Az MVVM működése}
-	\label{fig:mvvm}
+	\caption{Az MVVM működése\cite{mvvmpic}}
 \end{figure}
-
-% TODO: kép, hivatkozás
 
 A View szerepe a grafikus felület biztosítása, minden, amit a képernyőn meg szeretnénk jeleníteni, azt megadhatjuk itt a XAML kód által. A XAML kódon belül definiáljuk a binding-okat is.
 
 A Model tartalmazza a különböző adatokat és osztályokat, amikkel dolgozni szeretnénk.
 
-A ViewModel pedig a kettő közötti kapcsolatot adja meg. Itt történik például a példányosítás, és ezáltal jeleníthetjük meg azt, amit a View-n látni szeretnénk, általában command-okon keresztül.
-% TODO: hivatkozás
+A ViewModel pedig a kettő közötti kapcsolatot adja meg. Itt történik például a példányosítás, és ezáltal jeleníthetjük meg azt, amit a View-n látni szeretnénk, általában command-okon keresztül.\cite{mvvm}
 
 \SubSection{Azure DevOps}
 
-Az Azure DevOps (korábban Visual Studio Team Foundation Server (TFS)) fejlesztői szolgáltatásokat nyújt csapatok számára a munka megtervezéséhez, a kódfejlesztésben való együttműködéshez, valamint alkalmazások készítéséhez és telepítéséhez. Én személy szerint a verziókövetés miatt tartottam fontosnak a használatát, mivel lehetővé teszi, hogy a kódban történő változtatásokat nyomon követhessem, engedélyezi, hogy szükség esetén egy korábbi változatra visszaálljak és nyilvántartja a különbségeket a verziók között. Különböző verziókat is összeilleszthetünk, ilyenkor a módosítások miatt felmerülő problémák esetén pedig a konfliktusok lekezelésére is lehetőség van.
+Az Azure DevOps (korábban Visual Studio Team Foundation Server (TFS)) szoftverfejlesztői szolgáltatásokat nyújt csapatok számára az alkalmazások készítéséhez és a projektmunka hatékony végzéséhez. Én személy szerint a verziókövetés (5.2. ábra) miatt tartottam fontosnak a használatát, mivel lehetővé teszi, hogy a kódban történő változtatásokat nyomon követhessem, engedélyezi, hogy szükség esetén egy korábbi változatra visszaálljak és nyilvántartja a különbségeket a verziók között. Különböző verziókat is összeilleszthetünk, ilyenkor a módosítások miatt felmerülő problémák esetén pedig a konfliktusok lekezelésére is lehetőség van.\cite{azure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/azureHistory.png}
 	\caption{Verziókövetés az Azure DevOps-ban}
-	\label{fig:azure}
 \end{figure}
 
 \SubSection{ItemsControl, Canvas, Rectangle osztály}
@@ -66,17 +62,7 @@ A Canvas egy olyan területet biztosít, ahol elemeket tudunk pozícionálni.
 
 Az ItemsControl fogja tartalmi a Canvast, amelyet az ItemsControl ItemsPanel-jére tudunk elhelyezni. Az ItemsControl-ra azért van szükség, mert a kirajzolandó téglalapok egy Rectangle típusú ObservableCollection-ben lesznek eltárolva és ez a Control a kollekciók elemeinek megjelenítését segíti.
 
-
-
-
 \Section{UML diagram}
 
 % TODO: Tervezett osztályok, UML osztálydiagram. (Komponenseken belüli részek, metódus szignatúrák.)
 
-
-
-\Section{Adatmodell}
-
-% TODO: Áttekintő blokkdiagram, például, hogy az alkalmazás egyes részei hogyan kapcsolódnak egymáshoz (komponensek, interfészek).
-
-% ezeket a részeket nem tudom pontosan hogy kéne megírni

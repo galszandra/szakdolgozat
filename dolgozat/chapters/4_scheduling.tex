@@ -32,8 +32,7 @@ A következőkben különböző lehetőségeket vizsgálok meg, amelyek segíthe
 
 \Section{A hátizsák feladat}
 
-A hátizsák probléma egy dinamikus programozási probléma, amely az optimalizálási kategóriába tartozik. Célja, hogy adott súlyokkal és hozzárendelt értékekkel rendelkező elemek esetén maximalizálja az értéket egy hátizsákban, miközben a súlykorlátozáson belül marad. Minden elem csak egyszer választható ki, mivel egyetlen tételből sem áll rendelkezésünkre több mennyiség.
-% TODO: (https://www.educative.io/edpresso/what-is-the-knapsack-problem)
+A hátizsák probléma egy dinamikus programozási probléma, amely az optimalizálási kategóriába tartozik. Célja, hogy adott súlyokkal és hozzárendelt értékekkel rendelkező elemek esetén maximalizálja az értéket egy hátizsákban, miközben a súlykorlátozáson belül marad. Minden elem csak egyszer választható ki, mivel egyetlen tételből sem áll rendelkezésünkre több mennyiség.\cite{knapsack}
 
 A megoldás során előkészületeként feltehető, hogy az elemek érték/tömeg szerint csökkenő sorrendben vannak indexelve.
 
@@ -43,13 +42,9 @@ A hátizsák feladat felhasználása teljesen mértékben célravezetőnek tűni
 
 A hátizsák feladat ugyan egy az egyben ráilleszthető az adott program matematikai modelljére, mint megoldás, de hasznosnak tartom áttekinteni más lehetőségeket is. A termelésinformatika területén belül, pontosabban erőforrás tervezés során már sokat tanulhattam magáról az ütemezésről, különböző ütemtervek megvalósításáról és a hozzá kapcsolódó algoritmusokról is. A következőkben ezek közül nézek meg néhányat. Érdemes lehet megjegyezni, hogy az erőforrás tervezés során az algoritmusok és az elvégzendő munkák lehetnek egy vagy több gépre tervezve és ezekhez tartozhatnak különböző szabályok az ütemezések célja szerint.
 
-%Kulcsár diáit behivatkozni
-
 \SubSection{Palmer-módszer}
 
-Elsőként a Palmer módszer jutott a témával kapcsolatosan eszembe, amely azért keltette fel a figyelmem, mert itt a munkákhoz prioritási indexet kell rendelni, és ez a prioritási index értéke alapján történik maga az ütemezés. A prioritási index kiszámolására azonban olyan formula áll rendelkezésre, amelynek elve, hogy azok a munkák kerüljön előre, amelyeknek a megmunkálási idői az első gépeken rövidebbek a többihez képest. Így, mivel a prioritást szimplán idő alapján számolja, valamint többgépes rendszerre érvényes módszer, ezért el is vetettem ennek a használatát.
-
-% TODO: Kulcsár diasor behivatkozása
+Elsőként a Palmer módszer jutott a témával kapcsolatosan eszembe, amely azért keltette fel a figyelmem, mert itt a munkákhoz prioritási indexet kell rendelni, és ez a prioritási index értéke alapján történik maga az ütemezés. A prioritási index kiszámolására azonban olyan formula áll rendelkezésre, amelynek elve, hogy azok a munkák kerüljön előre, amelyeknek a megmunkálási idői az első gépeken rövidebbek a többihez képest. Így, mivel a prioritást szimplán idő alapján számolja, valamint többgépes rendszerre érvényes módszer, ezért el is vetettem ennek a használatát.\cite{palmer}
 
 \SubSection{Dannenbring-módszer}
 
@@ -58,14 +53,12 @@ A következő, Dannenbring-módszer ugyan súlyozási sémát használ az üteme
 
 \SubSection{Az SPT szabály}
 
-Az SPT (Shortest Processing Time) szabály lényege, hogy a munkákat a műveleti idők alapján nemcsökkendő sorrendbe rendezzük és ennek megfelelően indítjuk el azokat. Ez jelen esetben nálunk azt jelentené, hogy a tevékenységeket az alapján állítanánk sorba, hogy melyikkel tudunk leghamarabb végezni, viszont így az a probléma áll majd fent, hogy a prioritással nem tudunk foglalkozni.
-% TODO: Kulcsár diasor behivatkozása
+Az SPT (Shortest Processing Time) szabály lényege, hogy a munkákat a műveleti idők alapján nemcsökkendő sorrendbe rendezzük és ennek megfelelően indítjuk el azokat. Ez jelen esetben nálunk azt jelentené, hogy a tevékenységeket az alapján állítanánk sorba, hogy melyikkel tudunk leghamarabb végezni, viszont így az a probléma áll majd fent, hogy a prioritással nem tudunk foglalkozni.\cite{sptwspt}
 
 
 \SubSection{A WSPT szabály}
 
-A WSPT (Weighted Shortest Processing Time) szabály a legkisebb súlyozott műveleti idejű munkát veszi előre. Itt már szóba jön a súlyozás is, a munkák ideje mellett, tehát ez a módszer használhatónak tűnik. A WSPT szabály lényege, hogy minden egyes munka – a dolgozatomban feladat – esetében wi/pi hányadosokat képzünk, ahol a wi a Ji munka súlyát, a pi a Ji munka műveleti idejét jelenti. Majd elrendezzük a munkákat a kapott wi/pi hányadosok alapján nemnövekvő sorrendbe és ennek megfelelően indítjuk el azokat.  Tehát egy wi/pi fontossági mutatót kapunk és minél nagyobb lesz egy munka mutatója, annál előrébb fog kerülni a sorban.
-% TODO: Kulcsár diasor behivatkozása
+A WSPT (Weighted Shortest Processing Time) szabály a legkisebb súlyozott műveleti idejű munkát veszi előre. Itt már szóba jön a súlyozás is, a munkák ideje mellett, tehát ez a módszer használhatónak tűnik. A WSPT szabály lényege, hogy minden egyes munka – a dolgozatomban feladat – esetében wi/pi hányadosokat képzünk, ahol a wi a Ji munka súlyát, a pi a Ji munka műveleti idejét jelenti. Majd elrendezzük a munkákat a kapott wi/pi hányadosok alapján nemnövekvő sorrendbe és ennek megfelelően indítjuk el azokat.  Tehát egy wi/pi fontossági mutatót kapunk és minél nagyobb lesz egy munka mutatója, annál előrébb fog kerülni a sorban.\cite{sptwspt}
 
 A felsorolt ütemezések közül ez a szabály a sorba rendezés problémáját megoldaná, viszont arra nem elegendő, hogy figyelembe vegye mely feladatok által érhetnénk el a maximális összértéket.
 
