@@ -32,10 +32,9 @@ A szemléltetés kedvéért ezek után hozzáadtam hosszabb és rövidebb tevék
 
 Végeredményben, mikor az optimalizálás és az ütemezés is lefutott, megjelent az előállított ütemterv, amely a 7.3. ábrán látható. Megfigyelhető, hogy kettő feladat volt, ami már nem fért bele az ütemtervbe, mindkettő alacsony piroritással és hoszabb időtartammal rendelkezve. Ezeket a tevékenységeket külön jelzi is a program számunkra. A beütemezett feladatok közül pedig előre került egy magas prioritású feladat, követve azt egy közepes prioritásúval, amely rövid időtartama miatt is kerülhetett ennyire előre. Látható, hogy az ütemterv végén szintén magas prioritású feladat kapott helyet, ezt a többi feladathoz mérten hosszabb időtartamának köszönhette.
 
-
 \Section{Teszteset 2.}
 
-A második tesztesetben az előzőleg definiált tevékenységek újbóli megadása mellett, arra esett a választásom, hogy két feladat adatán módosítsak, megfigyelve, hogy a program az első tesztnél mennyivel különb eredményt ad. Az egyik a sorozatozás lett, amelynél ezúttal nem alacsony, hanem közepes prioritást választottam, az időtartamot meghagyva ugyanolyannak. A másik változás a beadandónál történt, itt a prioritást hagytam meg magas szinten, viszont az időtartamot jelentősen csökkentettem, az előző 3 óráról 30 percre. Így végeztem el az optimlaizálást, ami a 7.4. ábrán látható eredményt adta.
+A második tesztesetben az előzőleg definiált tevékenységek újbóli megadása mellett, arra esett a választásom, hogy két feladat adatán módosítsak, megfigyelve, hogy a program az első tesztnél mennyivel különb eredményt ad. Az egyik a sorozatozás lett, amelynél ezúttal nem alacsony, hanem közepes prioritást választottam, az időtartamot meghagyva ugyanolyannak. A másik változás a beadandónál történt, itt a prioritást hagytam meg magas szinten, viszont az időtartamot jelentősen csökkentettem, az előző 3 óráról 30 percre. Így végeztem el az optimalizálást, ami a 7.4. ábrán látható eredményt adta.
 
 \begin{figure}[h]
 	\centering
@@ -47,7 +46,7 @@ Ami egyből feltűnhet az az, hogy az ütemtervből kimaradt feladatoknál már 
 
 \Section{Teszteset 3.}
 
-A harmadik példában már csak öt tevékenységet adtam meg, amelyek összideje 245 perc volt, azaz kicsit több, mint 4 óra. Az elvárt eredmény itt az volt, hogy ne maradjon ki feladat az ütemtervből, hiszen az időkeretbe belefér az összes feladat, de az ütemezett sorrendre nézve egy hatékony időbeosztást látszódjon. Ezt teljesítette is a program, a két magas prioritású tevékenységet ütemezte előre, kezdve a rövidebb időtartamúval. Ezt követően a közepes prioritású főzést megelőzte az alacsony prioritással rendelkező séta, annak ksözönhetően, hogy arra fele annyi időt szántunk. Kimaradt feladatot nem jelzett.(7.5. ábra)
+A harmadik példában már csak öt tevékenységet adtam meg, amelyek összideje 245 perc volt, azaz kicsit több, mint 4 óra. Az elvárt eredmény itt az volt, hogy ne maradjon ki feladat az ütemtervből, hiszen az időkeretbe belefér az összes feladat, de az ütemezett sorrendre nézve egy hatékony időbeosztás látszódjon. Ezt teljesítette is a program, a két magas prioritású tevékenységet ütemezte előre, kezdve a rövidebb időtartamúval. Ezt követően a közepes prioritású főzést megelőzte az alacsony prioritással rendelkező séta, köszönhetően annak, hogy arra fele annyi időt szántunk. Kimaradt feladatot nem jelzett a program.(7.5. ábra)
 
 \begin{figure}[h]
 	\centering
@@ -60,7 +59,8 @@ A harmadik példában már csak öt tevékenységet adtam meg, amelyek összidej
 A szakdolgozatom olyan ütemezés és optimalizálás bemutatására szolgál, amely segít a mindennapi életben a teendők hatékony beütemezésében, ezáltal az időspórolásban, produktívabb életvitelben, mindezt diagramokon szemléltetve. A program egy magasabb szinten való megvalósítása még reprezentatívabb lenne, hiszen számtalan bővítési lehetőség van az alkalmazásban.
 
 A továbbfejlesztés során lehetőség lenne nem csak egy 8 órányi időkeretben történő ütemezésre, hanem akár heti szintű megvalósításra is. Továbbá lehetne fix időpontban történő események megadását is lehetővé tenni, mint például egy fodrászat, fogászat vagy akár egy megbeszélt találkozó, hogy aztán az ütemező ezeket is figyelembe tudja venni.
-Feladathozzáadánál is számottevő bővítési lehetőség szóba jöhet. Ilyen például:
+Feladatok hozzáadásánál is számottevő bővítési lehetőség szóba jöhet. Ilyen például:
+
 \begin{itemize}
 \item a prioritástartomány növelése,
 \item színválasztás a grafikus megjelenítéshez,

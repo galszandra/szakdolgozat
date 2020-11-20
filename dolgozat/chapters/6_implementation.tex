@@ -4,8 +4,6 @@
 
 A feladatok hozzáadásánál mindig a három, már ismertetett értéket kell megadni, tehát a feladat címét, a prioritását és az elvégzéséhez szükséges becsült időtartamot. A prioritás és időtartam megadásánál ToolTip-pel jelzi a program a segítő információkat, minthogy a prioritás értékhez csak az 1, 2 és 3 értékek adhatóak meg, az időtartamnál pedig maximum 480 perc.
 
-Mindhárom érték átadását a binding segíti.
-
 \begin{java}
 <TextBox Text="{Binding TaskPriority, Mode=TwoWay}"
 TextChanged="TextBox_TextChanged"
@@ -17,7 +15,7 @@ x:Name="priorityTextBox"
 PreviewTextInput="priority_PreviewTextInput"/>
 \end{java}
 
-%vagy ide inkább csak ennyit tegyek?:
+Mindhárom érték átadását a binding segíti.
 
 \begin{java}
 <TextBox Text="{Binding TaskTitle, Mode=TwoWay}"
@@ -40,7 +38,7 @@ Content="Hozzaad"/>
 
 Ilyenkor a ViewModel-en keresztül kapcsolat jön létre a Command-dal. Egy Command meghívásakor többek között az Execute(object Parameter) egy paraméteres metódus fut le, ahol a Command által használt adatok kerülnek továbbításra.
 
-Az általunk megadott adatokat eltároljuk egy Task osztály típusú változóban. A példányosítás során a Task osztály csupán 3 adata kerül beolvasásra, de ezen kívül található még egy TotalValue property is, amely automatikusan a prioritás/időtartam értéket számolja ki. Ez a későbbiekben, az optimalizálás során kerül felhasználásra.
+Az általunk megadott adatokat eltároljuk egy Task osztály típusú változóban. A példányosítás során a Task osztály csupán 3 adata kerül beolvasásra, de ezen kívül található még egy TotalValue property is, amely automatikusan a prioritás/időtartam hányadost számolja ki. Ez a későbbiekben, az optimalizálás során kerül felhasználásra.
 
 \begin{java}
 //Task class konstruktora
@@ -110,7 +108,6 @@ Minden téglalapot a TaskBars Rectangle típusú ObservableCollection-ben tárol
 </ItemsControl>
 \end{java}
 
-
 \Section{Optimalizálás és ütemezés}
 
 Az optimalizálás és beütemezés a hátizsák algoritmus szerint valósul meg. Ehhez két külön metódust definiáltam. Az egyik egy sorba rendezést végez el a Task listán, a másik pedig maga a hátizsák algoritmus implementálása.
@@ -121,11 +118,9 @@ A sorba rendezés a hátizsák probléma megoldása előtt segít megelőzni azt
 
 Ennek megvalósításához a LINQ-t használtam fel.
 
-A LINQ, azaz Language Integrated Queries (nyelvbe épített lekérdezések) a C\# keretrendszer egyik olyan komponense, mellyel struktúrált típusbiztos lekérdézeseket készíthetünk. Ezeket lekérdezéseket bármelyik IEnumerable<> interfészt implementáló gyűjteményen végre lehet hajtani, többek között listákon és tömbökön is.
+A LINQ, azaz Language Integrated Queries (nyelvbe épített lekérdezések) a C\# keretrendszer egyik olyan komponense, mellyel struktúrált típusbiztos lekérdézeseket készíthetünk. Ezeket lekérdezéseket bármelyik IEnumerable<> interfészt implementáló gyűjteményen végre lehet hajtani, többek között listákon és tömbökön is.\cite{linq}
 
-% TODO: hivatkozás
-
-A sorba rendezést az alábbi kód szerint, az OrderTasks metódusban definiáltam, amely paraméterként a Tasks listát kapja meg.
+A sorba rendezést az alábbi programkód szerint, az OrderTasks metódusban definiáltam, amely paraméterként a Tasks listát kapja meg.
 
 \begin{java}
 public static List<Scheduler.Task> OrderTasks
@@ -137,7 +132,7 @@ return orderedList;
 }
 \end{java}
 
-Ezáltal egy új listát kapunk, amelyben a TotalValue által csökkenő sorrendben szerepelnek a feladataink, amelyre majd a hátizsák algoritmust alkalmazzuk.
+Ezáltal egy új listát kapunk, amelyben a TotalValue által csökkenő sorrendben szerepelnek a feladataink. A hátizsák algoritmust erre a listára kell majd alkalmaznunk.
 
 \SubSection{Hátizsák algoritmus}
 
@@ -184,7 +179,4 @@ var rectangleCopy =
 TaskBars.First(x => x.Name == orderedList[i].TaskTitle);
 \end{java}
 
-
 Az ütemezés megjelenítésénél már egymás mellé állítva, egy sávban kapjuk meg a feladatokat. A grafikus ütemtervben a színábrázolás alapján is beazonosítható feladatok mellett egy lista is megjeleníti sorrendben a tevékenységek címeit. Az ütemterv alatt pedig egy másik lista is figyelmeztet azokról az elemekről, amelyek nem fértek bele a 8 órás időkeretbe.
-
-

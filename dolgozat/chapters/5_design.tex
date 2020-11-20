@@ -1,8 +1,6 @@
 \Chapter{Tervezés}
 
-
 \Section{Felhasznált technológiák}
-
 
 \SubSection{C\#}
 
@@ -12,20 +10,16 @@ A C\# egy általános célú, objektumorientált programozási nyelv, valamint a
 
 A .NET keretrendszer gyors és hatékony alkalmazásfejlesztést biztosít a .NET osztálykönyvtárak által. A különböző nyelveken írt komponensek együttműködését pedig a CLR (Common Language Runtime) és a CTS (Common Type Sytem) segítségével könnyíti meg.\cite{csharp}
 
-
 \SubSection{Visual Studio}
 
 A Visual Studio egy integrált fejlesztői környezet, amelyet a Microsoft fejlesztett ki különböző alkalmazások, pl.: konzol, webalkalmazások, mobilalkalmazások fejlesztésére. Lehetőséget nyújt a C\#-on kívül például Viusal Basic, F\# és számos más nyelveken történő programozásra.  Az alkalmazásom megvalósításakor én a Community kiadást választottam, ami egy olyan ingyenes verzió, amely a Professional kiadáshoz hasonló szolgáltatásokat tartalmaz.\cite{vs}
-
-
 
 \SubSection{WPF}
 
 A WPF (Windows Presentation Foundation) egy grafikus felhasználói felületet biztosító keretrendszer. Előnye a XAML nyelv, amely megkönnyíti a felhasználói felület létrehozását és szerkesztését, valamint lehetővé teszi magának a UI tervezésének elkülönítését a program többi részétől. Emellett, lehetőség van DataBinding használatára, amely állandó kapcsolatot biztosít az alkalmazás felhasználói felülete és backend-en tárolt adatok között. Így, egy adat backend-en történő értékének megváltozása során a felhasználói felület automatikusan fog frissülni és fordítva.\cite{wpf}\cite{databinding}
 
 \SubSection{MahApps}
-A MahApps egy olyan keretrendszer, amely egy modernebb felhasználói felület elérését segíti a WPF-en keresztül. Az alkalmazásom megvalósítása kezdetén kezdtem használni, viszont a későbbiekben háttérbe került a diagram Canvas-sal történő fejlesztése végett.
-
+A MahApps egy olyan keretrendszer, amely egy modernebb felhasználói felület elérését segíti a WPF-en keresztül. Az alkalmazásom megvalósítása kezdetén kezdtem használni, viszont a későbbiekben háttérbe került a diagram Canvas-sal történő fejlesztése miatt.
 
 \SubSection{MVVM}
 Az MVVM rövidítés a Model, View, ViewModel szavakból származik. A séma lényege, hogy az alkalmazásunkat erre a három, jól elkülöníthető logikai egységre szedjük szét, mely által jobban átláthatóvá válnak. A három egység különböző célokat szolgál.
@@ -60,18 +54,16 @@ A Rectangle osztály segít a téglalapok megrajzolásában, ami a feladatok hos
 
 A Canvas egy olyan területet biztosít, ahol elemeket tudunk pozícionálni.
 
-Az ItemsControl fogja tartalmi a Canvast, amelyet az ItemsControl ItemsPanel-jére tudunk elhelyezni. Az ItemsControl-ra azért van szükség, mert a kirajzolandó téglalapok egy Rectangle típusú ObservableCollection-ben lesznek eltárolva és ez a Control a kollekciók elemeinek megjelenítését segíti.
+Az ItemsControl fogja tartalmazni a Canvast, amelyet az ItemsControl ItemsPanel-jére tudunk elhelyezni. Az ItemsControl-ra azért van szükség, mert a kirajzolandó téglalapok egy Rectangle típusú ObservableCollection-ben lesznek eltárolva és ez a Control a kollekciók elemeinek megjelenítését segíti.
 
 \Section{UML diagram}
 
 Az alkalmazás UML diagramja az 5.2. ábrán látható. A program során az MVVM és Binding használatát a Command-ok segítik. A Command osztályok kapcsolatban állnak a ViewModel-lel, ami kapcsolatot létesít a UI felület és backend adatok között. Az AddTaskCommand-ban valósul meg a feladatok példányosítása, majd ezeknek a grafikus felületen történő megjelenítése a DrawChart osztályon belüli DrawTasks metódus által történik. Az OptimizeCommand osztály szolgál a feladatok ütemezésének és optimalizálásának végrehajtásához. A sorrendkialakítás a Knapsack osztály OrderTasks metódusa által, míg az ütemezési probléma megoldására választott hátizsák algoritmus a KnapSackAlgorithm metódus által valósul meg. A végső, kialakult ütemtervet a DrawChart osztályon belül a DrawScheduledTasks metódus által jeleníti meg az alkalmazás.
 
-Az MVVM-es megközelítés miatt a Commandok-ban szerepel egy-egy CanExecute metódus, amelyek után, true visszatérési érték esetén, lefutnak az Execute metódusok, amelyek a végrehajtandó programkódokat -, mint például egy feladat példányosítása vagy az OrderTasks metódus meghívása – tartalmazzák. A MainViewModel által tartalmazott RaisePropertyChanged metódus szintén az MVVM fontos részelént szokott szerepelni, az INotifyPropertyChanged interfészhez és a NotifyPropertyChanged event-hez kapcsolódik, amely a UI felé történő változások értesítéséért és frissítésekért felel.
-
+Az MVVM-es megközelítés miatt a Command-okban szerepel egy-egy CanExecute metódus, amelyek után, true visszatérési érték esetén lefutnak az Execute metódusok, amelyek a végrehajtandó programkódokat -, mint például egy feladat példányosítása vagy az OrderTasks metódus meghívása - tartalmazzák. A MainViewModel által tartalmazott RaisePropertyChanged metódus szintén az MVVM fontos részeként szokott szerepelni, az INotifyPropertyChanged interfészhez és a NotifyPropertyChanged event-hez kapcsolódva, amely a UI felé történő változások értesítéséért és frissítésekért felel.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=1]{images/uml.png}
+	\includegraphics[scale=1.3]{images/uml.png}
 	\caption{Az alkalmazás UML diagramja}
 \end{figure}
-
