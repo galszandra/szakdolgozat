@@ -64,5 +64,14 @@ Az ItemsControl fogja tartalmi a Canvast, amelyet az ItemsControl ItemsPanel-jé
 
 \Section{UML diagram}
 
-% TODO: Tervezett osztályok, UML osztálydiagram. (Komponenseken belüli részek, metódus szignatúrák.)
+Az alkalmazás UML diagramja az 5.2. ábrán látható. A program során az MVVM és Binding használatát a Command-ok segítik. A Command osztályok kapcsolatban állnak a ViewModel-lel, ami kapcsolatot létesít a UI felület és backend adatok között. Az AddTaskCommand-ban valósul meg a feladatok példányosítása, majd ezeknek a grafikus felületen történő megjelenítése a DrawChart osztályon belüli DrawTasks metódus által történik. Az OptimizeCommand osztály szolgál a feladatok ütemezésének és optimalizálásának végrehajtásához. A sorrendkialakítás a Knapsack osztály OrderTasks metódusa által, míg az ütemezési probléma megoldására választott hátizsák algoritmus a KnapSackAlgorithm metódus által valósul meg. A végső, kialakult ütemtervet a DrawChart osztályon belül a DrawScheduledTasks metódus által jeleníti meg az alkalmazás.
+
+Az MVVM-es megközelítés miatt a Commandok-ban szerepel egy-egy CanExecute metódus, amelyek után, true visszatérési érték esetén, lefutnak az Execute metódusok, amelyek a végrehajtandó programkódokat -, mint például egy feladat példányosítása vagy az OrderTasks metódus meghívása – tartalmazzák. A MainViewModel által tartalmazott RaisePropertyChanged metódus szintén az MVVM fontos részelént szokott szerepelni, az INotifyPropertyChanged interfészhez és a NotifyPropertyChanged event-hez kapcsolódik, amely a UI felé történő változások értesítéséért és frissítésekért felel.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{images/uml.png}
+	\caption{Az alkalmazás UML diagramja}
+\end{figure}
 
