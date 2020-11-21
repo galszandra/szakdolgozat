@@ -1,60 +1,58 @@
 \Chapter{Az ütemezési probléma}
 
-\Section{Az ütmezési probléma}
+\Section{Az ütemezési probléma}
 
 Az ütemezési probléma során azzal a kérdéssel állunk szembe, hogy milyen módon oldható meg, hogy a szabadon rendelkezésre álló feladatainkat úgy osszuk be, hogy azzal a lehető leghatékonyabb eredményt érjük el. A cél, hogy olyan időbeosztást kapjunk, ahol az ütemtervbe bekerült feladatok összértéke a legnagyobb lesz. 
 
-Ahhoz, hogy eldöntsük a feladatok közül melyek azok, amelyeket érdemes megvalósítanunk, valamint ahhoz, hogy ezeket hatékony sorrendben elhelyezhessük, szükségünk van olyan adatokra, amelyekkel jellemezni tudjuk a tevékenységeket és olyan számításra, képletre, amely hozzájárul ezek ütemezéséhez. A dolgozatomban ezen adatok, melyek jellemzik a tevékenyégeket, a már említett prioritás és idő, valamint ezek hányadosai lesznek. 
+Ahhoz, hogy eldöntsük a feladatok közül melyek azok, amelyeket érdemes megvalósítanunk, valamint ahhoz, hogy ezeket hatékony sorrendben elhelyezhessük, szükségünk van olyan adatokra, amelyekkel jellemezni tudjuk a tevékenységeket és olyan számításra, képletre, amely hozzájárul ezek ütemezéséhez. A dolgozatomban ezen adatok, melyek jellemzik a tevékenyégeket, a már említett prioritás és idő értékek, valamint ezek hányadosai lesznek. 
 
 Az ütemezés egyik fele tehát arról szól, hogy mely feladatok beütemezése által érjük el a lehető legnagyobb összértéket, tehát a legfontosabb feladatok kiválogatása, amely még belefér az időkeretbe. Itt amire figyelni kell az az, hogy ha van egy magas prioritású feladat a listánkon, ami még beleférne az időkeretünkbe, de van másik két kisebb prioritással rendelkező feladat is, amely szintén beleférne ebbe a keretbe és azok összértéke (prioritása) együttesen nézve magasabb értéket képvisel, mint az előbbi feladaté, akkor ezt a két tevékenységet helyezzük előtérbe az előbbi egy, magasabb prioritású feladat helyett.
 
-Az ütemezés másik fele a sorrend kialakításáról szól. Itt a prioritás még mindig egy fontos tényező, de az idő is meghatározó szerepet játszik. Kétségkívül, ha egy feladat csupán pár perc alatt letudható, azt nem érdemes halogatni – ld. kétperces technika módszere -, de nem hagyható figyelmen kívül a rövid „to-do-k” miatt egy sok időt felemésztő, de magasabb értéket képivelő tevékenység sem. Emiatt a prioritás/időtartam hányados szerinti csökkenő sorrendben történő ütemezést tartom itt megfelelőnek. Eszerint, ha megegyezik az időtartam kettő vagy több feladatnál, akkor a prioritás fog előtérbe kerülni és amelyik fontosabb azt ütemezzük előrébb, míg, ha a prioriás megegyezik, de valamelyiknek rövidebb az ideje, akkor a rövidebb időtartammal rendelkező feladatot válasszuk hamarabb az ütemezés során. Abban az esetben, ha megegyeznek az időtartamok és a prioritások is, és ugyanazt a hányadost kapjuk a képlet végén, a hozzáadási sorrend szerint ütemezhetjük be őket. Megjegyezném, hogy egy későbbi, továbbfejlesztett verzióban itt adódik remek lehetőség arra, hogy a modellben ne csak az adott két hányadossal számoljunk, hanem a már említett tényezőket is figyelembe vegyük, mint például mennyi haszonnal jár vagy épp mennyire nehéz a feladat elvégzése és ezeket a számításba belekalkulálva egy még hatékonyabb megoldást érhetünk el.
+Az ütemezés másik fele a sorrend kialakításáról szól. Itt a prioritás még mindig egy fontos tényező, de az idő is meghatározó szerepet játszik. Kétségkívül, ha egy feladat csupán pár perc alatt megoldható, azt nem érdemes halogatni -- lásd kétperces technika módszere, \ref{sec:twominutes}. szakasz --, de nem hagyható figyelmen kívül a rövid „to-do”-k miatt egy sok időt felemésztő, de magasabb értéket képivelő tevékenység sem. Emiatt a prioritás/időtartam hányados szerinti csökkenő sorrendben történő ütemezést tartom itt megfelelőnek. Eszerint, ha megegyezik az időtartam kettő vagy több feladatnál, akkor a prioritás fog előtérbe kerülni, és amelyik fontosabb azt ütemezzük előrébb, míg, ha a prioriás megegyezik, de valamelyiknek rövidebb az ideje, akkor a rövidebb időtartammal rendelkező feladatot válasszuk hamarabb az ütemezés során. Abban az esetben, ha megegyeznek az időtartamok és a prioritások is, és ugyanazt a hányadost kapjuk a képlet végén, a hozzáadási sorrend szerint ütemezhetjük be őket. Megjegyezném, hogy egy későbbi, továbbfejlesztett verzióban itt adódik remek lehetőség arra, hogy a modellben ne csak az adott két hányadossal számoljunk, hanem a már említett tényezőket is figyelembe vegyük, mint például mennyi haszonnal jár vagy épp mennyire nehéz a feladat elvégzése és ezeket a számításba belekalkulálva egy még hatékonyabb megoldást érhetünk el.
 
-Az optimalizálás és ütemezés során bementként várt értékek a programban a következőképp alakulnak majd.
-
+Az optimalizálás és ütemezés során bemenetként várt értékek a programban a következőképp alakulnak majd.
 Minden egyes feladahoz szükséges definiálni:
-
 \begin{itemize}
 \item egy prioritást: 1, 2 vagy 3-as értékkel, és
 \item feladat elvégzéséhez szükséges becsült időtartamot: 1-480 perc között.
 \end{itemize}
-
 A sorba rendezés kialakításához ebből a két értékből kapott prioritás/időtartam hányadost használjuk fel.
 
-Az időkeret értéke előre definiált 480 perc.
+Az egy napra vonatkozó időkeret értéke előre definiált, 480 perc.
 
 Kimenetnél egy olyan ütemtervet várunk, ahol azon feladatok kerültek beütemezésre, amelyek belefértek a 480 perces időkeretbe úgy, hogy fontosságuk a legnagyobb összértéket képviselik, mindezt a feladatokhoz tartozó prioritás/időtartam hányados alapján csökkenő sorrendben kialakítva.
 
-A következőkben különböző lehetőségeket vizsgálok meg, amelyek segíthetnek a feladatok beütemezésében és az optimalizált eredmény elérésében.
+A következőkben különböző optimalizálási problémákat és módszereket vizsgálok meg, amelyek segíthetnek a feladatok beütemezésében és az optimális eredmény elérésében.
 
 \Section{A hátizsák feladat}
 
-A hátizsák probléma egy dinamikus programozási probléma, amely az optimalizálási kategóriába tartozik. Célja, hogy adott súlyokkal és hozzárendelt értékekkel rendelkező elemek esetén maximalizálja az értéket egy hátizsákban, miközben a súlykorlátozáson belül marad. Minden elem csak egyszer választható ki, mivel egyetlen tételből sem áll rendelkezésünkre több mennyiség.\cite{knapsack}
+A hátizsák probléma egy dinamikus programozási probléma, amely az optimalizálási kategóriába tartozik. Célja, hogy adott súlyokkal és hozzárendelt értékekkel rendelkező elemek esetén maximalizálja az értéket egy hátizsákban, miközben a súlykorlátozáson belül marad. Minden elem csak egyszer választható ki, mivel egyetlen tételből sem áll rendelkezésünkre nagyobb mennyiség \cite{knapsack}.
 
-A megoldás során előkészületeként feltehető, hogy az elemek érték/tömeg szerint csökkenő sorrendben vannak indexelve.
+A megoldás során feltehető, hogy az elemek érték/tömeg szerint csökkenő sorrendben vannak indexelve.
 
-A hátizsák feladat felhasználása teljesen mértékben célravezetőnek tűnik, hiszen az érték/tömeg páros teljes mértékben megfeleltethető az általam tervezett alkalmazás prioritás/időtartam attribútumaival, és megoldja azt a problémát is, hogy úgy válassza ki az elemeket egy listából, hogy azzal eleget tegyen a kapacitás feltételének és emellett egy maximalizált eredmény adjon. Emellett a sorba rendezés problémáját is megoldja maga az optimalizálás elvégzése előtt, így nincs szükség utólagos ütemezésre.
+A hátizsák feladat felhasználása teljes mértékben célravezetőnek tűnik, hiszen az érték/tömeg páros megfeleltethető az általam tervezett alkalmazás prioritás/időtartam attribútumaival, és megoldja azt a problémát is, hogy úgy válassza ki az elemeket egy listából, hogy azzal eleget tegyen a kapacitás feltételének, és emellett egy maximalizált eredmény adjon. A sorba rendezés problémáját szintén megoldja az optimalizálás elvégzése előtt, így nincs szükség utólagos ütemezésre.
 
 \Section{Erőforrás tervezéshez kapcsolódó algoritmusok és szabályok}
 
-A hátizsák feladat ugyan egy az egyben ráilleszthető az adott program matematikai modelljére, mint megoldás, de hasznosnak tartom áttekinteni más lehetőségeket is. A termelésinformatika területén belül, pontosabban erőforrás tervezés során már sokat tanulhattam magáról az ütemezésről, különböző ütemtervek megvalósításáról és a hozzá kapcsolódó algoritmusokról is. A következőkben ezek közül nézek meg néhányat. Érdemes lehet megjegyezni, hogy az erőforrás tervezés során az algoritmusok és az elvégzendő munkák lehetnek egy vagy több gépre tervezve és ezekhez tartozhatnak különböző szabályok az ütemezések célja szerint.
+A hátizsák feladat ugyan egy az egyben ráilleszthető az adott program matematikai modelljére, mint megoldás, de hasznosnak tartom áttekinteni más lehetőségeket is. A termelésinformatika területén belül, pontosabban erőforrás tervezés során már sokat tanultam magáról az ütemezésről, különböző ütemtervek megvalósításáról és a hozzá kapcsolódó algoritmusokról is. A következőkben ezek közül tekintek át néhányat. Érdemes lehet megjegyezni, hogy az erőforrás tervezés során az algoritmusok és az elvégzendő munkák lehetnek egy vagy több gépre tervezve és ezekhez tartozhatnak különböző szabályok az ütemezések célja szerint.
 
 \SubSection{Palmer-módszer}
 
-Elsőként a Palmer módszer jutott a témával kapcsolatosan eszembe, amely azért keltette fel a figyelmem, mert itt a munkákhoz prioritási indexet kell rendelni, és ennek a prioritási indexnek az értéke alapján történik meg az ütemezés. A prioritási index kiszámolására azonban olyan formula áll rendelkezésre, amelynek elve, hogy azok a munkák kerüljenek előre, amelyeknek a megmunkálási idői az első gépeken rövidebbek a többihez képest. Így, mivel a prioritást szimplán idő alapján számolja, valamint többgépes rendszerre érvényes módszer, el is vetettem ennek a használatát.\cite{palmer}
+Elsőként a Palmer módszer jutott a témával kapcsolatosan eszembe, amely azért keltette fel a figyelmem, mert itt a munkákhoz prioritási indexet kell rendelni, és ennek a prioritási indexnek az értéke alapján történik meg az ütemezés. A prioritási index kiszámolására azonban olyan formula áll rendelkezésre, amelynek elve, hogy azok a munkák kerüljenek előre, amelyeknek a megmunkálási idői az első gépeken rövidebbek a többihez képest \cite{palmer}. Így, mivel a prioritást szimplán idő alapján számolja, valamint többgépes rendszerre érvényes módszer, el is vetettem ennek a használatát a tervezett, egy felhasználós rendszer esetében. Több résztvevős projekt, és az ahhoz készített szoftverek esetében tünne egy megfelelő választásnak.
 
 \SubSection{Dannenbring-módszer}
 
-A következő, Dannenbring-módszer ugyan súlyozási sémát használ az ütemezésekhez, viszont szintén többgépes feladatoknál alkalmazható, így visszatértem más tanult módszerek megvizsgálásához, pontosabban az egyetlen erőforrást tartalmazó ütemezési feladatok megoldásaihoz és onnan próbáltam ötleteket szerezni.
+A következő, Dannenbring-módszer ugyan súlyozási sémát használ az ütemezésekhez, viszont szintén többgépes feladatoknál alkalmazható, így visszatértem más tanult módszerek vizsgálatához, konkrétan az egyetlen erőforrást tartalmazó ütemezési feladatok megoldásaihoz.
 
 \SubSection{Az SPT szabály}
 
-Az SPT (Shortest Processing Time) szabály lényege, hogy a munkákat a műveleti idők alapján nemcsökkendő sorrendbe rendezzük és ennek megfelelően indítjuk el azokat. Ez jelen esetben nálunk azt jelentené, hogy a tevékenységeket az alapján állítanánk sorba, hogy melyikkel tudunk leghamarabb végezni, viszont így az a probléma áll majd fent, hogy a prioritással nem tudunk foglalkozni.\cite{sptwspt}
+Az SPT (\textit{Shortest Processing Time}) szabály lényege, hogy a munkákat a műveleti idők alapján nemcsökkendő sorrendbe rendezzük és ennek megfelelően indítjuk el azokat. Ez jelen esetben nálunk azt jelentené, hogy a tevékenységeket az alapján állítanánk sorba, hogy melyikkel tudunk leghamarabb végezni, viszont így az a probléma áll majd fent, hogy a prioritással nem tudunk foglalkozni \cite{sptwspt}.
 
 \SubSection{A WSPT szabály}
 
-A WSPT (Weighted Shortest Processing Time) szabály a legkisebb súlyozott műveleti idejű munkát veszi előre. Itt már tehát szóba jön a súlyozás is, a munkák ideje mellett, tehát ez a módszer használhatónak tűnik. A WSPT szabály lényege, hogy minden egyes munka – a dolgozatomban feladat – esetében w/p hányadosokat képzünk, ahol a w egy J munka súlyát, a p az adott J munka műveleti idejét jelenti. Majd elrendezzük a munkákat a kapott w/p hányadosaik alapján nemnövekvő sorrendbe és ennek megfelelően indítjuk el azokat.  Tehát egy w/p fontossági mutatót kapunk és minél nagyobb lesz egy munka mutatója, annál előrébb fog kerülni a sorban.\cite{sptwspt}
+A WSPT (\textit{Weighted Shortest Processing Time}) szabály a legkisebb súlyozott műveleti idejű munkát veszi előre. Itt már tehát szóba jön a súlyozás is, a munkák ideje mellett, tehát ez a módszer használhatónak tűnik. A WSPT szabály lényege, hogy minden egyes munka -- a dolgozatomban feladat -- esetében $\frac{w}{p}$ hányadosokat képzünk, ahol a $w$ egy $J$ munka súlyát, a $p$ az adott $J$ munka műveleti idejét jelenti. Majd elrendezzük a munkákat a kapott $\frac{w}{p}$ hányadosaik alapján nemnövekvő sorrendbe és ennek megfelelően indítjuk el azokat.
+Tehát egy $\frac{w}{p}$ fontossági mutatót kapunk és minél nagyobb lesz egy munka mutatója, annál előrébb fog kerülni a sorban \cite{sptwspt}.
 
 A felsorolt ütemezések közül ez a szabály a sorba rendezés problémáját megoldaná, viszont arra nem elegendő, hogy figyelembe vegye mely feladatok által érhetnénk el a maximális összértéket.
 
-A dolgozatomban végül a hátizsák feladat algoritmusának felhasználására esett a választásom, mivel a programom ütemezési és optimalizálási problémájára is hatékonyan alkalmazható.
+A dolgozatomban végül a hátizsák feladat algoritmusának felhasználására esett a választásom, mivel a programom ütemezési és optimalizálási problémájához ez illeszkedik a legjobban.

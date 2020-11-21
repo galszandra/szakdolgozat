@@ -2,72 +2,65 @@
 
 \Section{Feladat hozzáadása}
 
-A feladatok hozzáadásánál mindig a három, már ismertetett értéket kell megadni, tehát a feladat címét, a prioritását és az elvégzéséhez szükséges becsült időtartamot. A prioritás és időtartam megadásánál ToolTip-pel jelzi a program a segítő információkat, minthogy a prioritás értékhez csak az 1, 2 és 3 értékek adhatóak meg, az időtartamnál pedig maximum 480 perc.
-
+A feladatok hozzáadásánál mindig a három, már ismertetett értéket kell megadni, tehát a feladat címét, a prioritását és az elvégzéséhez szükséges becsült időtartamot. A prioritás és időtartam megadásánál \textit{ToolTip}-pel jelzi a program a segítő információkat, vagyis azt, hogy a prioritás értékhez csak az 1, 2 és 3 értékek adhatóak meg, az időtartamnál pedig maximum 480 perc.
 \begin{java}
-<TextBox Text="{Binding TaskPriority, Mode=TwoWay}"
-TextChanged="TextBox_TextChanged"
-mah:TextBoxHelper.Watermark="Prioritas:"
-ToolTip="1 - alacsony, 2 - kozepes, 3 - magas"
-mah:TextBoxHelper.UseFloatingWatermark="True"
-Margin="0 0 0 10"
-x:Name="priorityTextBox"
-PreviewTextInput="priority_PreviewTextInput"/>
+<TextBox
+  Text = "{Binding TaskPriority, Mode=TwoWay}"
+  TextChanged = "TextBox_TextChanged"
+  mah:TextBoxHelper.Watermark = "Prioritas:"
+  ToolTip = "1 - alacsony, 2 - kozepes, 3 - magas"
+  mah:TextBoxHelper.UseFloatingWatermark = "True"
+  Margin = "0 0 0 10"
+  x:Name = "priorityTextBox"
+  PreviewTextInput = "priority_PreviewTextInput"
+/>
 \end{java}
-
 Mindhárom érték átadását a binding segíti.
-
 \begin{java}
-<TextBox Text="{Binding TaskTitle, Mode=TwoWay}"
-<TextBox Text="{Binding TaskPriority, Mode=TwoWay}"
-<TextBox Text="{Binding TaskDuration, Mode=TwoWay}"
+<TextBox Text="{Binding TaskTitle, Mode=TwoWay}" />
+<TextBox Text="{Binding TaskPriority, Mode=TwoWay}" />
+<TextBox Text="{Binding TaskDuration, Mode=TwoWay}" />
 \end{java}
-
-Ehhez szükséges még az AddTaskCommand definiálása, amely a „Hozzáad” című CommandButton megnyomása során fut le.
-
+Ehhez szükséges még az \texttt{AddTaskCommand} definiálása, amely a „Hozzáad” felirítú \\ \texttt{CommandButton} megnyomása során fut le.
 \begin{java}
 <Button 
-Margin="0 0 0 10"
-Command="{Binding AddTaskCommand}"
-CommandParameter="{Binding Text}"
-Click="AddTaskButton_Click"
-Height="20" Width="80"
-Name="btnAddTask"
-Content="Hozzaad"/>	
+  Margin = "0 0 0 10"
+  Command = "{Binding AddTaskCommand}"
+  CommandParameter = "{Binding Text}"
+  Click = "AddTaskButton_Click"
+  Height = "20" Width="80"
+  Name = "btnAddTask"
+  Content = "Hozzaad"
+/>	
 \end{java}
 
-Ilyenkor a ViewModel-en keresztül kapcsolat jön létre a Command-dal. Egy Command meghívásakor többek között az Execute(object Parameter) egy paraméteres metódus fut le, ahol a Command által használt adatok kerülnek továbbításra.
+Ilyenkor a \texttt{ViewModel}-en keresztül kapcsolat jön létre a \texttt{Command}-dal. Egy \texttt{Command} meghívásakor többek között az \texttt{Execute(object Parameter)} egy paraméteres metódus fut le, ahol a \texttt{Command} által használt adatok kerülnek továbbításra.
 
-Az általunk megadott adatokat eltároljuk egy Task osztály típusú változóban. A példányosítás során a Task osztály csupán 3 adata kerül beolvasásra, de ezen kívül található még egy TotalValue property is, amely automatikusan a prioritás/időtartam hányadost számolja ki. Ez a későbbiekben, az optimalizálás során kerül felhasználásra.
-
+Az általunk megadott adatokat eltároljuk egy \texttt{Task} osztály típusú változóban. A példányosítás során a \texttt{Task} osztály csupán 3 adata kerül beolvasásra, de ezen kívül található még egy \texttt{TotalValue} \textit{property} is, amely automatikusan a prioritás/időtartam hányadost számolja ki. Ez a későbbiekben, az optimalizálás során kerül felhasználásra.
 \begin{java}
 //Task class konstruktora
 public Task(string title, int priority, int duration)
 {
-	TaskTitle = title;
-	TaskPriority = priority;
-	TaskDuration = duration;
-	TotalValue = (double)priority/(double)duration;
+    TaskTitle = title;
+    TaskPriority = priority;
+    TaskDuration = duration;
+    TotalValue = (double)priority / (double)duration;
 }	
 \end{java}
-
-A létrejött példányunkat végül hozzáadjuk a Task osztály típusú Tasks listánkhoz. Ez a lista tárolja majd az összes definiált task-ot.
-
+A létrejött példányunkat végül hozzáadjuk a \texttt{Task} osztály típusú \texttt{Tasks} listánkhoz. Ez a lista tárolja majd az összes definiált feladatot.
 \begin{java}
-	var task = new Scheduler.Task(
-	mainViewModel.TaskTitle,
-	mainViewModel.TaskPriority,
-	mainViewModel.TaskDuration);
-	
-	mainViewModel.Tasks.Add(task);
+    var task = new Scheduler.Task(
+        mainViewModel.TaskTitle,
+        mainViewModel.TaskPriority,
+        mainViewModel.TaskDuration
+    );
+    mainViewModel.Tasks.Add(task);
 \end{java}
-
-A példányosítás előtt még megtörténik az adatok helyes formátumban való megadásának ellenőrzése is. A Command ezáltal csak akkor fut le, ha minden érték helyesen van megadva, ellenkező esetben MessageBox-szal jelzi a hibásan megadott értékeket.
+A példányosítás előtt még megtörténik az adatok helyes formátumban való megadásának ellenőrzése is. A \texttt{Command} ezáltal csak akkor fut le, ha minden érték helyesen van megadva, ellenkező esetben \texttt{MessageBox}-szal jelzi a hibásan megadott értékeket.
 
 \Section{Feladat megjelenítése grafikusan}
 
-A következő lépés a feladat vizuális megjelenítése. Ez még mindig az AddTaskCommand meghívása során történik a DrawTasks metódus segítségével. Ennek szerepe, hogy az adott task-ot grafikusan megjelenítse a UI-on egy új rectangle létrehozása által. A task tulajdonságaiból felhasználjuk az időtartamot, ami a rectangle hosszát fogja adni, és a prioritást, amivel vizuálisan is szemléltethetjük a task fontosságát, mégpedig úgy, hogy minden rectangle kap egy keretet, aminek a színe a prioritás értékétől függően változik: magas prioritás esetén piros, közepes prioritás esetén szürke, alacsony prioritás esetén pedig zöld színű lesz.
-
+A következő lépés a feladat vizuális megjelenítése. Ez még mindig az \texttt{AddTaskCommand} meghívása során történik a \texttt{DrawTasks} metódus segítségével. Ennek szerepe, hogy az adott feladatot grafikusan megjelenítse a felhasználói felületen egy új \texttt{Rectangle} példány létrehozása által. A feladat tulajdonságaiból felhasználjuk az időtartamot, ami a téglalap hosszát fogja adni, és a prioritást, amivel vizuálisan is szemléltethetjük a feladat fontosságát, mégpedig úgy, hogy minden téglalap kap egy keretet, aminek a színe a prioritás értékétől függően változik: magas prioritás esetén piros, közepes prioritás esetén szürke, alacsony prioritás esetén pedig zöld színű lesz.
 \begin{java}
 var rectangle = new Rectangle();
 rectangle.Name = TaskTitle;
@@ -77,71 +70,65 @@ rectangle.Fill = PickBrush();
 rectangle.StrokeThickness = 1;
 switch (TaskPriority)
 {
-	case 1:
-	rectangle.Stroke = Brushes.Green;
-	break;
-	case 2:
-	rectangle.Stroke = Brushes.Gray;
-	break;
-	case 3:
-	rectangle.Stroke = Brushes.Red;
-	break;
+case 1:
+    rectangle.Stroke = Brushes.Green;
+    break;
+case 2:
+    rectangle.Stroke = Brushes.Gray;
+    break;
+case 3:
+    rectangle.Stroke = Brushes.Red;
+    break;
 }
 Canvas.SetLeft(rectangle, 100);
 Canvas.SetTop(rectangle, TaskBars.Count * 16);
 TaskBars.Add(rectangle);
 \end{java}
+A \texttt{SetLeft} és \texttt{SetTop} metódusok a \texttt{Canvas}-on történő pozicionálásra szolgálnak.
 
-A SetLeft() és SetTop() metódusok a Canvas-on történő pozicionálásra szolgálnak.
+A feladatok megkülönböztetése és az ütemtervben megkapott eredménnyel való könnyebb beazonosíthatóság érdekében mindenképp szerettem volna a téglalapokat külön színnel ábrázolni. Azért, hogy a keretszín általi fontosság jelölése ne vesszen kárba, halványabb színek felhasználását preferáltam. A \texttt{Brushes} osztályon belül számtalan lehetőség áll különböző színek felhasználására, viszont kifejezetten a világos színek kiválasztására nincs lehetőség, ezért egy külön metódust definiáltam, amely egy világos színeket tartalmazó listából tér vissza egy véletlenszerű színnel, amellyel befesti a téglalapot.
 
-A feladatok megkülönböztetése és az ütemtervben megkapott eredménnyel való könnyebb beazonosíthatóság érdekében mindenképp szerettem volna a téglalapokat külön színnel ábrázolni. Azért, hogy a keretszín általi fontosság jelölése ne vesszen kárba, halványabb színek felhasználását preferáltam. A Brushes osztályon belül számtalan lehetőség áll különböző színek felhasználására, viszont kifejezetten a világos színek kiválasztására nincs lehetőség, ezért egy külön metódust definiáltam, amely egy világos színeket tartalmazó listából tér vissza egy random színnel, amellyel befesti a téglalapot.
-
-Minden téglalapot a TaskBars Rectangle típusú ObservableCollection-ben tárolunk el. Ez a Collection van összekötve Binding által az ItemsControllal, ahol a Canvas-hoz is hozzáférünk és az MVVM-nek köszönhetően a UI módosítása nélkül, automatikusan megjelenik minden téglalap, ami bekerül a Collection-be.
-
+Minden téglalapot a \texttt{TaskBars} \texttt{Rectangle} típusú \texttt{ObservableCollection}-ben tárolunk el. Ez a \texttt{Collection} van összekötve \texttt{Binding} által az \texttt{ItemsControl}-lal, ahol a \texttt{Canvas}-hez is hozzáférünk és az MVVM-nek köszönhetően a UI módosítása nélkül, automatikusan megjelenik minden téglalap, ami bekerül a \texttt{Collection}-be.
 \begin{java}
 <ItemsControl ItemsSource="{Binding TaskBars}">
-<ItemsControl.ItemsPanel>
-	<ItemsPanelTemplate>
-		<Canvas/>
-	</ItemsPanelTemplate>
-</ItemsControl.ItemsPanel>
+    <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+            <Canvas />
+        </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
 </ItemsControl>
 \end{java}
 
 \Section{Optimalizálás és ütemezés}
 
-Az optimalizálás és beütemezés a hátizsák algoritmus szerint valósul meg. Ehhez két külön metódust definiáltam. Az egyik egy sorba rendezést végez el a Task listán, a másik pedig maga a hátizsák algoritmus implementálása.
+Az optimalizálás és beütemezés a hátizsák algoritmus szerint valósul meg. Ehhez két külön metódust definiáltam. Az egyik egy sorba rendezést végez el a feladat listán, a másik pedig maga a hátizsák algoritmus implementálása.
 
 \SubSection{Sorba rendezés}
 
 A sorba rendezés a hátizsák probléma megoldása előtt segít megelőzni azt, hogy maga az optimalizálás után még egy ütemezést végre kelljen hajtani, mivel a cél az, hogy ne csak egy olyan ütemtervet kapjunk, ami megadja mi fér bele az időkeretbe a maximális összérték, azaz a legfontosabb feladatok elvégzése érdekében, hanem egy hatékony sorrendet is biztosít.
+Ennek megvalósításához a \textit{LINQ}-t használtam fel.
 
-Ennek megvalósításához a LINQ-t használtam fel.
+A \textit{LINQ}, azaz \textit{Language Integrated Queries} (nyelvbe épített lekérdezések) a C\# keretrendszer egyik olyan komponense, mellyel struktúrált típusbiztos lekérdézeseket készíthetünk. Ezeket lekérdezéseket bármelyik \texttt{IEnumerable<>} interfészt implementáló gyűjteményen végre lehet hajtani, többek között listákon és tömbökön is \cite{linq}.
 
-A LINQ, azaz Language Integrated Queries (nyelvbe épített lekérdezések) a C\# keretrendszer egyik olyan komponense, mellyel struktúrált típusbiztos lekérdézeseket készíthetünk. Ezeket lekérdezéseket bármelyik IEnumerable<> interfészt implementáló gyűjteményen végre lehet hajtani, többek között listákon és tömbökön is.\cite{linq}
-
-A sorba rendezést az alábbi programkód szerint, az OrderTasks metódusban definiáltam, amely paraméterként a Tasks listát kapja meg.
-
+A sorba rendezést az alábbi programkód szerint, az \texttt{OrderTasks} metódusban definiáltam, amely paraméterként a \texttt{Tasks} listát kapja meg.
 \begin{java}
-public static List<Scheduler.Task> OrderTasks
-(List<Scheduler.Task> Tasks)
+public static List<Scheduler.Task>
+OrderTasks(List<Scheduler.Task> Tasks)
 {
-var orderedList =
-Tasks.OrderByDescending(task => task.TotalValue).ToList();
-return orderedList;
+  var orderedList =
+    Tasks.OrderByDescending(task => task.TotalValue).ToList();
+  return orderedList;
 }
 \end{java}
-
-Ezáltal egy új listát kapunk, amelyben a TotalValue által csökkenő sorrendben szerepelnek a feladataink. A hátizsák algoritmust erre a listára kell majd alkalmaznunk.
+Ezáltal egy új listát kapunk, amelyben a \texttt{TotalValue} által csökkenő sorrendben szerepelnek a feladataink. A hátizsák algoritmust erre a listára kell majd alkalmaznunk.
 
 \SubSection{Hátizsák algoritmus}
 
 A hátizsák probléma megoldására egy rekurzív algoritmust alkalmaztam. Az algoritmus célja meghatározni az adott kapacitásba beleférő elemeket úgy, hogy  azoknak az összértéke a legnagyobb legyen. Mindenképp figyelembe kellett vennem, hogy olyan algoritmust használjak, ami nem csak egy összértékkel tér vissza, hanem amely lefutása során valamiféle módon elkülöníti azt az információt, hogy pontosan mely tevékenységek fértek bele az időkeretbe és melyek nem. Ehhez egy tömb áll rendelkezésre, amely 0 értékkel illeti azokat az elemeket, amik nem fértek bele az időbe, és 1-es értékkel illeti azokat, amelyek belefértek.
-
 \begin{java}
-//two versions:
-//(1) task included
-//(2) task not included
+// two versions:
+// (1) task included
+// (2) task not included
 
 int[] v1 = new int[included.Length];
 Array.Copy(included, 0, v1, 0, v1.Length);
@@ -152,31 +139,28 @@ Array.Copy(included, 0, v2, 0, v2.Length);
 	
 int result1 = orderedList[n - 1].TaskPriority
 + KnapSackAlgorithm(capacity-orderedList[n - 1].TaskDuration,
-orderedList, n-1, v1);
-	
-int result2 = KnapSackAlgorithm
-(capacity, orderedList, n - 1, v2);
+                    orderedList, n-1, v1);
+
+int result2 =
+    KnapSackAlgorithm(capacity, orderedList, n - 1, v2);
 	
 if (result1 > result2)
 {
-	Array.Copy(v1, 0, included, 0, v1.Length);
-	return result1;
+    Array.Copy(v1, 0, included, 0, v1.Length);
+    return result1;
 }
-	
 else
 {
-	Array.Copy(v2, 0, included, 0, v2.Length);
-	return result2;
+    Array.Copy(v2, 0, included, 0, v2.Length);
+    return result2;
 }
 \end{java}
 
 \Section{Ütemterv megjelenítése}
 
-A megjelenítés itt is hasonlóan működik, téglalapok kirajzoltatásának segítségével, mint a feladatok ábrázolásánál. Az eredeti rectangle példányok megkereséséhez szintén LINQ-t használtam, amely név szerint azonosítja be a keresett elemeket.
-
+A megjelenítés itt is hasonlóan működik, téglalapok kirajzoltatásának segítségével, mint a feladatok ábrázolásánál. Az eredeti \texttt{rectangle} példányok megkereséséhez szintén \textit{LINQ}-t használtam, amely név szerint azonosítja be a keresett elemeket.
 \begin{java}
 var rectangleCopy =
-TaskBars.First(x => x.Name == orderedList[i].TaskTitle);
+  TaskBars.First(x => x.Name == orderedList[i].TaskTitle);
 \end{java}
-
 Az ütemezés megjelenítésénél már egymás mellé állítva, egy sávban kapjuk meg a feladatokat. A grafikus ütemtervben a színábrázolás alapján is beazonosítható feladatok mellett egy lista is megjeleníti sorrendben a tevékenységek címeit. Az ütemterv alatt pedig egy másik lista is figyelmeztet azokról az elemekről, amelyek nem fértek bele a 8 órás időkeretbe.
