@@ -29,7 +29,7 @@ Az MVVM rövidítés a \textit{Model}, \textit{View}, \textit{ViewModel} szavakb
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/mvvm.png}
-	\caption{Az MVVM működése (forrás: \url{https://bhawk.hu/mi-fan-terem-az-mvvm})}
+	\caption{Az MVVM működése (forrás: \url{https://docs.devexpress.com/WPF/15112/mvvm-framework})}
 	\label{fig:mvvm}
 \end{figure}
 
@@ -62,13 +62,12 @@ Az \texttt{ItemsControl}-ra azért van szükség, mert a kirajzolandó téglalap
 
 \Section{UML diagram}
 
-Az alkalmazás UML diagramja \aref{fig:uml}. ábrán látható. A program során az MVVM és \textit{Binding} használatát a \textit{Command}-ok segítik. A \textit{Command} osztályok kapcsolatban állnak a \textit{ViewModel}-lel, ami kapcsolatot létesít a UI felület és backend adatok között. Az \texttt{AddTaskCommand}-ban valósul meg a feladatok példányosítása, majd ezeknek a grafikus felületen történő megjelenítése a \texttt{DrawChart} osztályon belüli \texttt{DrawTasks} metódus által történik. Az \texttt{OptimizeCommand} osztály szolgál a feladatok ütemezésének és optimalizálásának végrehajtásához. A sorrendkialakítás a \texttt{KnapSack} osztály \texttt{OrderTasks} metódusa által, míg az ütemezési probléma megoldására választott hátizsák algoritmus a KnapSackAlgorithm metódus által valósul meg. A végső, kialakult ütemtervet a \texttt{DrawChart} osztályon belül a \texttt{DrawScheduledTasks} metódus által jeleníti meg az alkalmazás.
+Az alkalmazás UML diagramja \aref{fig:uml}. ábrán látható. A program során az MVVM és \textit{Binding} használatát a \textit{Command}-ok segítik. A \textit{Command} osztályok kapcsolatban állnak a \textit{ViewModel}-lel, ami kapcsolatot létesít a UI felület és backend adatok között. Az \texttt{AddTaskCommand}-ban valósul meg a feladatok példányosítása, majd ezeknek a grafikus felületen történő megjelenítése a \texttt{DrawChart} osztályon belüli \texttt{DrawTasks} metódus által történik. Az \texttt{OptimizeCommand} osztály szolgál a feladatok ütemezésének és optimalizálásának végrehajtásához. A sorrendkialakítás a \texttt{KnapSack} osztály \texttt{OrderTasks} metódusa által, míg az ütemezési probléma megoldására választott hátizsák algoritmus a \texttt{KnapSackAlgorithm} metódus által valósul meg. A végső, kialakult ütemtervet a \texttt{DrawChart} osztályon belül a \texttt{DrawScheduledTasks} metódus által jeleníti meg az alkalmazás.
 
 Az MVVM-es megközelítés miatt a \textit{Command}-okban szerepel egy-egy \texttt{CanExecute} metódus, amelyek után, \texttt{true} visszatérési érték esetén lefutnak az \texttt{Execute} metódusok, amelyek a végrehajtandó programkódokat -- mint például egy feladat példányosítása vagy az \texttt{OrderTasks} metódus meghívása -- tartalmazzák. A  \texttt{MainViewModel} által tartalmazott \texttt{RaisePropertyChanged} metódus szintén az MVVM fontos részeként szokott szerepelni, az \texttt{INotifyPropertyChanged} interfészhez és a \texttt{NotifyPropertyChanged} eseményhez kapcsolódva, amely a felhasználói felület felé történő változások értesítéséért és frissítésekért felel.
-
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{images/uml.png}
+	\includegraphics[scale=0.9]{images/uml.png}
 	\caption{Az alkalmazás UML diagramja}
 	\label{fig:uml}
 \end{figure}
