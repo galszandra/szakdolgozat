@@ -1,6 +1,13 @@
 \Chapter{Összefoglalás}
 
-A szakdolgozatomban egy ütemező alkalmazást valósítottam meg, amely egy optimális időbeosztás elérését segíti. A kidolgozás során áttekintettem és összehasonlítottam olyan módszereket és alkalmazásokat, amelyeket a hatékonyságnövelés céljából hoztak létre. Megvizsgáltam különböző algoritmusokat, módszereket és szabályokat, amik az ütemezéssel és optimalizálással kapcsolatos problémákkal foglalkoznak és/vagy azokat oldják meg. A tervezés és megvalósítás során még inkább elmélyedtem a C\# sajátosságaiban, valamint megismerkedtem az \texttt{ItemsControl} és \texttt{Canvas} használatával. Végeredményben sikerült egy olyan alkalmazást létrehoznom, amely prioritás és időtartam alapon vizsgál meg felhasználó által megadott feladatokat, hogy ezáltal egy minél hatékonyabb ütemtervet állítson elő, amelyet grafikus formában, egy diagramon jelenít meg.
+A szakdolgozatomban egy ütemező alkalmazást valósítottam meg, amely egy optimális időbeosztás elérését segíti. A kidolgozás során áttekintettem és összehasonlítottam olyan módszereket és alkalmazásokat, amelyeket a hatékonyságnövelés céljából hoztak létre. Ezáltal következtettem azokra a tényezőkre, amelyeknek figyelembevétele elengedhetetlen volt a megfelelő eredmény kialakítása érdekében. Így esett a választásom a feladatokhoz tartozó prioritás és időtartam értékekre, valamint ezek hányadosaira.
+
+Különböző algoritmusokat, módszereket és szabályokat is megvizsgáltam, amik az ütemezéssel és optimalizálással kapcsolatos problémákkal foglalkoznak és/vagy azokat oldják meg. Végül a hátizsák probléma algoritmusát használtam fel a megvalósítás során, mivel a programom ütemezési és optimalizálási problémájához ez illeszkedett a legjobban.
+A tervezés és implementáció során még inkább elmélyedtem a C\# sajátosságaiban, valamint megismerkedtem az \texttt{ItemsControl} és \texttt{Canvas} használatával. Ezek segítségemre voltak abban, hogy a feladatokat és az ütemtervet vizuális formában szemlélteni tudjam.
+
+Végeredményben sikerült egy olyan alkalmazást létrehoznom, amely az említett prioritás és időtartam alapon vizsgál meg felhasználó által megadott feladatokat, hogy ezáltal egy minél hatékonyabb ütemtervet állítson elő, amelyet grafikus formában, egy diagramon jelenít meg.
+
+A tesztelés során több esetet is megvizsgáltam annak érdekében, hogy megbizonyosodjak a program megfelelő működéséről. Az egyik teszteset során például egy már meglévő ütemterv feladatait használtam újra kisebb módosításokkal, hogy megfigyeljem mennyivel másabb erdményt ad az ütmező. Ezek a változtatások láthatóan befolyásolták az új ütemterv eredményét, a módosítások mértékének megfelelően.
 
 A dolgozatban többféle továbbfejlesztési lehetőséget felvetettem, közülük mindenképpen a nagyobb volumenű prioritásértékek megadását tartom fontosnak a precízebb eredmény elérése érekében, valamint egy heti szintű megvalósítást, amelyben lehetőség nyílna fix időpontú események megadására, így a program naptárként és ütemezőként is funkcionálhatna egyszerre.
 
@@ -12,7 +19,14 @@ A dolgozatban többféle továbbfejlesztési lehetőséget felvetettem, közül�
 
 In my thesis I implemented a scheduling application which aim was to help create an optimized schedule for its users.
 
-First, I reviewed and compared different methods and applications that were developed to increase efficiency. I studied various algorithms, methods and rules that address and/or solve scheduling and optimization problems. During the design and implementation, I got to learn even more about C\# and became familiar with using \texttt{ItemsControl} and \texttt{Canvas}. Ultimately, I was able to create an application that examines the tasks defined by users on the basis of priority and duration, in order to create the most efficient schedule possible and then display it on a diagram.
+First, I reviewed and compared different methods and applications that were developed to increase efficiency. In doing so, I identified the factors that were essential to take into account in order to achieve a proper outcome. So I chose the priority and duration values defined for the tasks, and their quptients as these factors.
+
+I also studied various algorithms, methods and rules that address and/or solve scheduling and optimization problems. Eventually, I decided to use the algorithm of the backpack problem during the implementation as this algorithm suited the scheduling and optimization problem of my program the most.
+
+During the design and implementation, I got to learn even more about C\# and became familiar with using \texttt{ItemsControl} and \texttt{Canvas}. These classes helped me to represent the tasks and the schedule in a visual form.
+
+Ultimately, I was able to create an application that examines the tasks defined by users on the basis of priority and duration, in order to create the most efficient schedule possible and then display it on a diagram.
+
+During testing, I examined some cases to make sure the program was working properly. In one test case, for example, I reused the tasks of an existing schedule with minor modifications to observe how much different the new schedule would be from the original one. The changes clearly affected the outcome of the new schedule, in line with the extent of the modifications.
 
 In the dissertation I proposed several possibilities for further development. I find it very important to specify a higher volume for priority values in order to achieve a more precise result and to create a weekly implementation where users can specify fixed time events so that the application can function as a calendar as well as a scheduler.
-
